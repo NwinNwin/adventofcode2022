@@ -6,8 +6,8 @@ for i in f_content:
     y = content.split("move ")[1].split(" from ")
     content2 = y[1].split(" to ")
 
-    content3 = [int(y[0])]
-    content3.extend(content2)
+    content3 = [int(y[0])] + content2
+
     content3 = [int(j) for j in content3]
     
     movingstacks = table[content3[1]][:content3[0]]
