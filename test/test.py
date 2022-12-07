@@ -1,19 +1,22 @@
 f = open("test/test.txt", "r")
-f_content = f.readlines()[5:]
-table = {1:["N", "Z"], 2:["D", "C", "M"], 3:["P"]}
+f_content = f.readlines()
+
+current_dir = []
+folders = dict()
 for i in f_content:
-    content = i.rstrip()
-    y = content.split("move ")[1].split(" from ")
-    content2 = y[1].split(" to ")
+    i = i.rstrip()
+    if i.startswith("$ cd "):
+        dir_name = i.split("$ cd ")[1]
+        if dir_name == "..":
+            current_dir.pop()
+        else:
+            if dir_name not in folders:
+                folders[dir_name] = 0
+            current_dir.append(i.split("$ cd ")[1])
+    elif str(i.split()[0]).isnumeric():
+        for folder in current_dir:
+            folders[folder] += int(i.split()[0])
 
-    content3 = [int(y[0])] + content2
-
-    content3 = [int(j) for j in content3]
-    
-    movingstacks = table[content3[1]][:content3[0]]
-    table[content3[2]] = movingstacks + table[content3[2]]
-
-    table[content3[1]] = table[content3[1]][content3[0]:]
-
-for key in table:
-    print(table[key][0])
+at_most = [folders[i] for i in folders if folders[i] <= 100000]
+at_most.sort()
+print(sum(at_most))
