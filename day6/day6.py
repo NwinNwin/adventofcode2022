@@ -10,7 +10,7 @@ f_content = f.readlines()[0]
 #     else: 
 #         break
 
-
+#part2
 content = 14
 while True:
     if len(set(f_content[:14])) != 14:
