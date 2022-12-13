@@ -1,4 +1,4 @@
-f = open("day10/input.txt", "r")
+f = open("dday10/input.txt", "r")
 f_content = f.readlines()
 
 #part 1
